@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "707205948324",
+    "firebase_url": "https://myapplication2-21313.firebaseio.com",
+    "project_id": "myapplication2-21313",
+    "storage_bucket": "myapplication2-21313.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707205948324:android:5a96762a36c9e657",
+        "android_client_info": {
+          "package_name": "com.example.wenik.myapplication2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707205948324-oetquf1a0jb0p2a19ar4gk4doocurekb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wenik.myapplication2",
+            "certificate_hash": "16c26181a031c980d0c5e88965d8c4c296f4d4fa"
+          }
+        },
+        {
+          "client_id": "707205948324-orije60qrcfmgh524kr5fver6e64uj0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKAk68FrsGr34cB664-znjT96h1Lj5-lg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707205948324-orije60qrcfmgh524kr5fver6e64uj0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wenik.myapplication2.AddContact">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_constraintBottom_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintTop_creator="1">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layoutDirection="rtl"
+            android:orientation="vertical"
+            android:weightSum="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_constraintBottom_creator="1"
+            tools:layout_constraintLeft_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintTop_creator="1">
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.32"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="אנא הוסף איש קשר"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textColorLink="@android:color/holo_orange_dark"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/InptFnameContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView2"
+                android:layout_alignRight="@+id/textView2"
+                android:layout_below="@+id/textView2"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:text="שם פרטי"
+                android:textColor="@android:color/holo_green_dark"
+                android:textColorLink="@android:color/holo_orange_dark"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/TxtFnameContact"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:ems="10"
+
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="-122dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <TextView
+                android:id="@+id/InptLnameContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/textView4"
+                android:layout_alignRight="@+id/textView4"
+                android:layout_below="@+id/editText2"
+                android:layout_marginTop="20dp"
+                android:paddingTop="10dp"
+                android:text="שם משפחה"
+                android:textColor="@android:color/holo_green_dark"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/TxtLnameContact"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                tools:layout_editor_absoluteX="-122dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <TextView
+                android:id="@+id/InptPhoneContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/editText4"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/editText3"
+                android:layout_toRightOf="@+id/editText3"
+                android:paddingTop="10dp"
+                android:text="מספר טלפון"
+                android:textColor="@android:color/holo_green_dark"
+                android:textColorLink="@android:color/holo_orange_dark"
+                android:textSize="18dp" />
+
+            <EditText
+                android:id="@+id/TxtPhoneContact"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+
+                tools:layout_editor_absoluteX="-122dp"
+                tools:layout_editor_absoluteY="62dp" />
+
+            <Button
+                android:id="@+id/BtnAddContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="הוסף"
+                android:textColor="@android:color/holo_blue_light"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

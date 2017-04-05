@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.wenik.myapplication2.ActionMenu">
+
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            tools:layout_constraintTop_creator="1"
+            tools:layout_constraintRight_creator="1"
+            tools:layout_constraintBottom_creator="1"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginTop="8dp"
+            tools:layout_constraintLeft_creator="1"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp">
+
+
+            <Button
+                android:id="@+id/BtnLogin"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:layoutDirection="rtl"
+                android:text="כניסה"
+                android:textAlignment="center"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_gravity="center_horizontal"
+
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/BtnAddChild"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_gravity="center_horizontal"
+                android:text="הוספת ילד או התראה"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:layoutDirection="rtl"
+                android:textAlignment="center"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+
+
+            <Button
+                android:id="@+id/BtnGoToAddContact"
+                android:text="הוספת איש קשר"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_width="300dp"
+                android:layout_gravity="center_horizontal"
+
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:layoutDirection="rtl"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+
+
+
+            <Button
+                android:id="@+id/BtnUpdateDetails"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="עדכון פרטים"
+                android:textSize="19dp"
+                android:layoutDirection="rtl"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold" />
+
+
+
+            <Button
+                android:id="@+id/BtnRegister"
+                android:textColor="@android:color/holo_green_dark"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="300dp"
+                android:layout_height="60dp"
+                android:layoutDirection="rtl"
+                android:text="הרשמה"
+                android:textDirection="rtl"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
