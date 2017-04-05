@@ -1,5 +1,6 @@
 package com.example.wenik.myapplication2;
 
+import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +9,12 @@ import android.widget.Toast;
 
 public class AddContact extends AppCompatActivity {
 
-    EditText phone;
-    EditText fname;
-    EditText lname;
-    String phoneSt;
-    String fnameSt;
-    String lnameSt;
+    private EditText phone = null;
+    private EditText fname = null;
+    private EditText lname = null;
+    private String phoneSt;
+    private String fnameSt;
+    private String lnameSt;
     private MySecondDBHandler db;
 
     @Override
@@ -34,8 +35,16 @@ public class AddContact extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                addContact();
-                Toast.makeText(AddContact.this,db.contactsToString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(AddContact.this,phoneSt+" "+fname+" "+lnameSt, Toast.LENGTH_LONG).show();
+
+                try{
+            addContact();
+            Toast.makeText(AddContact.this,db.contactsToString(), Toast.LENGTH_LONG).show();
+        }
+        catch (SQLException e)
+        {
+            Toast.makeText(AddContact.this,e.toString(), Toast.LENGTH_LONG).show();
+        }
 
             }
         });
@@ -43,7 +52,7 @@ public class AddContact extends AppCompatActivity {
 
     public void addContact()
     {
-       Contact contact = new Contact(phoneSt,fnameSt,lnameSt,"0546881104");
+       Contact contact = new Contact(phoneSt,fnameSt,lnameSt,"0546881105");
         db.addContact(contact);
     }
 }

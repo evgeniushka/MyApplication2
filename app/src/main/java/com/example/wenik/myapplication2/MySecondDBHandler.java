@@ -87,8 +87,6 @@ public class MySecondDBHandler extends SQLiteOpenHelper {
                 COLUMN_CONTACTLNAME + " string ," +
                 "primary key ( "+COLUMN_USERPHONE +", "+ COLUMN_CONTACTPHONE+ ") ) ;";
         db.execSQL(createContacts);
-
-
     }
 
     @Override
