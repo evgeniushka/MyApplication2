@@ -300,4 +300,23 @@ public class MySecondDBHandler extends SQLiteOpenHelper {
         return up;
 
     }
+
+    public String returnFirstLoggedInUser()
+    {
+        String st="";
+        SQLiteDatabase db = getWritableDatabase();
+        String loggedUser = "Select * from Users where logged=1;";
+        Cursor c=db.rawQuery(loggedUser,null);
+        c.moveToFirst();
+        while(!c.isAfterLast())
+        {
+            if(c.getString(c.getColumnIndex("phone"))!=null)
+            {
+                st+= c.getString(c.getColumnIndex("phone"));
+            }
+        }
+        c.close();
+        db.close();
+        return st;
+    }
 }
