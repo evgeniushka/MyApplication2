@@ -27,15 +27,12 @@ public class AddContact extends AppCompatActivity {
         fname= (EditText) findViewById(R.id.TxtFnameContact);
         lname= (EditText) findViewById(R.id.TxtLnameContact);
 
-        phoneSt= phone.getText().toString();
-        fnameSt= fname.getText().toString();
-        lnameSt= lname.getText().toString();
-
         findViewById(R.id.BtnAddContact).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Toast.makeText(AddContact.this,phoneSt+" "+fname+" "+lnameSt, Toast.LENGTH_LONG).show();
+                phoneSt= phone.getText().toString();
+                fnameSt= fname.getText().toString();
+                lnameSt= lname.getText().toString();
 
                 try{
             addContact();
