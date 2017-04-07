@@ -1,7 +1,11 @@
 package com.example.wenik.myapplication2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -18,6 +22,8 @@ public class Register extends AppCompatActivity {
     private EditText ETPass = null;
     private EditText ETEmail = null;
     private Boolean logged=true;
+    private SharedPreferences sp;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,28 +37,32 @@ public class Register extends AppCompatActivity {
             public void onClick(View v) {
 
                 if(InputCheck()) {
-                    Toast.makeText(Register.this, "input check went successfully", Toast.LENGTH_LONG).show();
                     try
                     {
-                        Toast.makeText(Register.this, "0"+ETPhone.getText().toString(), Toast.LENGTH_LONG).show();
                         AddUserOnClick();
                     }
                     catch (Exception e)
                     {
-                        Toast.makeText(Register.this, "can't add user", Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, "בעיה ברישום משתמש. נסה מאוחר יותר.", Toast.LENGTH_LONG).show();
                     }
                     try
                     {
-                        Toast.makeText(Register.this, db.databaseToString(), Toast.LENGTH_LONG).show();
+                        sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
+
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("firstTime", "no");
+                        editor.putString("isLogged", "yes");
+                        editor.putString("userPhone", ETPhone.getText().toString() );
+                        editor.commit();
                     }
-                    catch (SQLException e)
+                    catch (Exception e)
                     {
                         Toast.makeText(Register.this, e.toString(), Toast.LENGTH_LONG).show();
                     }
                     try
                     {
                         Intent intent = new Intent(Register.this, AddChild.class);
-                        intent.putExtra("EXTRA_SESSION_ID","0"+ETPhone.getText().toString());
+                    //    intent.putExtra("EXTRA_SESSION_ID",ETPhone.getText().toString());
                         startActivity(intent);
                     }
                     catch(Exception e)
@@ -61,10 +71,17 @@ public class Register extends AppCompatActivity {
                     }
                 }
                 else
-                    Toast.makeText(Register.this, "input check didn't go successfully", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(Register.this, "יש לטפל בהודעות השגיאה", Toast.LENGTH_LONG).show();
             }
-        });}
+        });
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Register.this, ActionMenuDrawer.class);
+        startActivity(intent);
+    }
 
     public boolean InputCheck()
     {

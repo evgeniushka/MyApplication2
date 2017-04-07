@@ -1,6 +1,8 @@
 package com.example.wenik.myapplication2;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,9 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class ActionMenuDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener
+
+{
+    private SharedPreferences sp;
+    private TextView t1;
+    private TextView t2;
+    private SharedPreferences.Editor editor = sp.edit();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +34,8 @@ public class ActionMenuDrawer extends AppCompatActivity
         setContentView(R.layout.activity_action_menu_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        findViewById(R.id.button2).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button3).setVisibility(View.INVISIBLE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -32,7 +45,6 @@ public class ActionMenuDrawer extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -41,6 +53,63 @@ public class ActionMenuDrawer extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        t1 = (TextView) findViewById(R.id.hello);
+        t2 = (TextView) findViewById(R.id.alertsData);
+        sp = getSharedPreferences("LogInfo",Context.MODE_PRIVATE);
+
+        try
+        {
+                editor.putString("firstTime", "yes");
+                editor.putString("isLogged", "no");
+                editor.commit();
+        }
+            catch (Exception e)
+            {
+                Toast.makeText(ActionMenuDrawer.this, e.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        String value = sp.getString("isLogged", "");
+        String value2 = sp.getString("firstTime", "");
+
+        if(value.compareTo("no")==0 || value2.compareTo("yes")==0)
+        {
+            t1.setText("ברוך הבא לאפליקציה, \n לרישום לחץ כאן");
+            t2.setText("");
+            findViewById(R.id.button2).setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            t1.setText("שלום, ___");
+            t2.setText("יש לך "+"__"+"התראות פעילות: \n");
+            findViewById(R.id.button3).setVisibility(View.VISIBLE);
+        }
+
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ActionMenuDrawer.this, Register.class);
+                startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    editor.putString("firstTime", "no");
+                    editor.putString("isLogged", "no");
+                    editor.putString("userPhone", "");
+                    editor.commit();
+                    Intent intent = new Intent(ActionMenuDrawer.this, ActionMenuDrawer.class);
+                    startActivity(intent);
+                }
+                catch (Exception e)
+                {
+                    Toast.makeText(ActionMenuDrawer.this, e.toString(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     @Override
