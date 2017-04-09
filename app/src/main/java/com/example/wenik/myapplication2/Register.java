@@ -45,19 +45,22 @@ public class Register extends AppCompatActivity {
                     {
                         Toast.makeText(Register.this, "בעיה ברישום משתמש. נסה מאוחר יותר.", Toast.LENGTH_LONG).show();
                     }
+                    sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
+
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("firstTime", "no");
+                    editor.putString("isLogged", "yes");
                     try
                     {
-                        sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
 
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString("firstTime", "no");
-                        editor.putString("isLogged", "yes");
+
                         editor.putString("userPhone", ETPhone.getText().toString() );
                         editor.commit();
                     }
                     catch (Exception e)
                     {
                         Toast.makeText(Register.this, e.toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(Register.this, editor.toString(), Toast.LENGTH_LONG).show();
                     }
                     try
                     {

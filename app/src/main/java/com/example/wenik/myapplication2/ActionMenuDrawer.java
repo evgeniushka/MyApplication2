@@ -25,7 +25,6 @@ public class ActionMenuDrawer extends AppCompatActivity
     private SharedPreferences sp;
     private TextView t1;
     private TextView t2;
-    private SharedPreferences.Editor editor = sp.edit();
 
 
     @Override
@@ -57,12 +56,13 @@ public class ActionMenuDrawer extends AppCompatActivity
         t1 = (TextView) findViewById(R.id.hello);
         t2 = (TextView) findViewById(R.id.alertsData);
         sp = getSharedPreferences("LogInfo",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
 
         try
         {
-                editor.putString("firstTime", "yes");
-                editor.putString("isLogged", "no");
-                editor.commit();
+            editor.putString("firstTime", "yes");
+            editor.putString("isLogged", "no");
+            editor.commit();
         }
             catch (Exception e)
             {
@@ -82,7 +82,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         {
             t1.setText("שלום, ___");
             t2.setText("יש לך "+"__"+"התראות פעילות: \n");
-            findViewById(R.id.button3).setVisibility(View.VISIBLE);
+         //   findViewById(R.id.button3).setVisibility(View.VISIBLE);
         }
 
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
@@ -97,6 +97,8 @@ public class ActionMenuDrawer extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 try {
+                    SharedPreferences.Editor editor = sp.edit();
+
                     editor.putString("firstTime", "no");
                     editor.putString("isLogged", "no");
                     editor.putString("userPhone", "");
@@ -121,6 +123,7 @@ public class ActionMenuDrawer extends AppCompatActivity
             super.onBackPressed();
         }
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
