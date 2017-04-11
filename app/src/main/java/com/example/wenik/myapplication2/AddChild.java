@@ -1,8 +1,12 @@
 package com.example.wenik.myapplication2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -52,8 +56,7 @@ public class AddChild extends AppCompatActivity {
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
         String value = sp.getString("isLogged", "");
-        String valuePhone = sp.getString("userPhone", "");
-        userPhone = valuePhone;
+        userPhone = sp.getString("userPhone", "");
 
         timeP= (TimePicker) findViewById(R.id.alertTime);
 
@@ -155,6 +158,19 @@ public class AddChild extends AppCompatActivity {
                 {
                     Toast.makeText(AddChild.this, "can't print alerts" , Toast.LENGTH_LONG).show();
                 }
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY,21);
+                calendar.set(Calendar.MINUTE,41);
+
+                Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+
             }
         });
     }
