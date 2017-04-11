@@ -3,7 +3,9 @@ package com.example.wenik.myapplication2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.SQLException;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -25,12 +27,15 @@ public class ActionMenuDrawer extends AppCompatActivity
     private SharedPreferences sp;
     private TextView t1;
     private TextView t2;
+    private MySecondDBHandler db;
 
-//onCreate
+    //onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_action_menu_drawer);
+        db = new MySecondDBHandler(this, null, null, 1);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -41,6 +46,7 @@ public class ActionMenuDrawer extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -58,26 +64,13 @@ public class ActionMenuDrawer extends AppCompatActivity
         t1 = (TextView) findViewById(R.id.hello);
         t2 = (TextView) findViewById(R.id.alertsData);
 
-        //sharedpreference
-        sp = getSharedPreferences("LogInfo",Context.MODE_PRIVATE);
+        //shared preference
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
-
-        try
-        {
-            editor.putString("firstTime", "yes");
-            editor.putString("isLogged", "no");
-            editor.putString("userPhone", "");
-            editor.apply();
-        }
-            catch (Exception e)
-            {
-                Toast.makeText(ActionMenuDrawer.this, e.toString(), Toast.LENGTH_LONG).show();
-
-            }
         String value = sp.getString("isLogged", "");
-        String value2 = sp.getString("firstTime", "");
+        String valuePhone = sp.getString("userPhone", "");
 
-        if(value.compareTo("no")==0 || value2.compareTo("yes")==0)
+        if(value.compareTo("no")==0)
         {
             t1.setText("ברוך הבא לאפליקציה, \n לרישום לחץ כאן");
             t2.setText("");
@@ -85,7 +78,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         }
         else
         {
-            t1.setText("שלום, ___");
+            t1.setText("שלום, "+db.getUserFirstName(valuePhone.substring(1)));
             t2.setText("יש לך "+"__"+"התראות פעילות: \n");
             findViewById(R.id.button3).setVisibility(View.VISIBLE);
         }
@@ -103,10 +96,8 @@ public class ActionMenuDrawer extends AppCompatActivity
             public void onClick(View v) {
                 try {
                     SharedPreferences.Editor editor = sp.edit();
-
-                    editor.putString("firstTime", "no");
-             //       editor.putString("isLogged", "no");
-             //       editor.putString("userPhone", "");
+                    editor.putString("isLogged", "no");
+                    editor.putString("userPhone", "");
                     editor.apply();
                     Intent intent = new Intent(ActionMenuDrawer.this, ActionMenuDrawer.class);
                     startActivity(intent);

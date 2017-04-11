@@ -319,4 +319,24 @@ public class MySecondDBHandler extends SQLiteOpenHelper {
         db.close();
         return st;
     }
+
+    public String getUserFirstName(String ph)
+    {
+        String st="";
+        SQLiteDatabase db = getWritableDatabase();
+        String user = "Select * from Users where phone = "+ph;
+        Cursor c=db.rawQuery(user,null);
+        c.moveToFirst();
+        while(!c.isAfterLast())
+        {
+            if(c.getString(c.getColumnIndex("phone"))!=null)
+            {
+                st+= c.getString(c.getColumnIndex("fname"));
+            }
+            c.moveToNext();
+        }
+        c.close();
+        db.close();
+        return st;
+    }
 }

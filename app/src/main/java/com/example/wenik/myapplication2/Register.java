@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,7 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         db = new MySecondDBHandler(this, null, null, 1);
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
 
         findViewById(R.id.btnRegister).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +48,7 @@ public class Register extends AppCompatActivity {
                         Toast.makeText(Register.this, "בעיה ברישום משתמש. נסה מאוחר יותר.", Toast.LENGTH_LONG).show();
                     }
                     //session
-                    sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
+                //    sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("firstTime", "no");
                     editor.putString("isLogged", "yes");
