@@ -26,16 +26,13 @@ public class ActionMenuDrawer extends AppCompatActivity
     private TextView t1;
     private TextView t2;
 
-
+//onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_action_menu_drawer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        findViewById(R.id.button2).setVisibility(View.INVISIBLE);
-        findViewById(R.id.button3).setVisibility(View.INVISIBLE);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +50,15 @@ public class ActionMenuDrawer extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //both buttons are invisible at the creation on the activity
+        findViewById(R.id.button2).setVisibility(View.INVISIBLE);
+        findViewById(R.id.button3).setVisibility(View.INVISIBLE);
+
+        //getting the textViews of greeting and alertsData of the user
         t1 = (TextView) findViewById(R.id.hello);
         t2 = (TextView) findViewById(R.id.alertsData);
+
+        //sharedpreference
         sp = getSharedPreferences("LogInfo",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
@@ -62,7 +66,8 @@ public class ActionMenuDrawer extends AppCompatActivity
         {
             editor.putString("firstTime", "yes");
             editor.putString("isLogged", "no");
-            editor.commit();
+            editor.putString("userPhone", "");
+            editor.apply();
         }
             catch (Exception e)
             {
@@ -82,7 +87,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         {
             t1.setText("שלום, ___");
             t2.setText("יש לך "+"__"+"התראות פעילות: \n");
-         //   findViewById(R.id.button3).setVisibility(View.VISIBLE);
+            findViewById(R.id.button3).setVisibility(View.VISIBLE);
         }
 
         findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
@@ -100,9 +105,9 @@ public class ActionMenuDrawer extends AppCompatActivity
                     SharedPreferences.Editor editor = sp.edit();
 
                     editor.putString("firstTime", "no");
-                    editor.putString("isLogged", "no");
-                    editor.putString("userPhone", "");
-                    editor.commit();
+             //       editor.putString("isLogged", "no");
+             //       editor.putString("userPhone", "");
+                    editor.apply();
                     Intent intent = new Intent(ActionMenuDrawer.this, ActionMenuDrawer.class);
                     startActivity(intent);
                 }
@@ -112,7 +117,8 @@ public class ActionMenuDrawer extends AppCompatActivity
                 }
             }
         });
-    }
+    }//end onCreate
+
 
     @Override
     public void onBackPressed() {

@@ -45,17 +45,15 @@ public class Register extends AppCompatActivity {
                     {
                         Toast.makeText(Register.this, "בעיה ברישום משתמש. נסה מאוחר יותר.", Toast.LENGTH_LONG).show();
                     }
+                    //session
                     sp = getSharedPreferences("LogInfo", Context.MODE_PRIVATE);
-
                     SharedPreferences.Editor editor = sp.edit();
                     editor.putString("firstTime", "no");
                     editor.putString("isLogged", "yes");
                     try
                     {
-
-
                         editor.putString("userPhone", ETPhone.getText().toString() );
-                        editor.commit();
+                        editor.apply();
                     }
                     catch (Exception e)
                     {
@@ -65,7 +63,7 @@ public class Register extends AppCompatActivity {
                     try
                     {
                         Intent intent = new Intent(Register.this, AddChild.class);
-                    //    intent.putExtra("EXTRA_SESSION_ID",ETPhone.getText().toString());
+                        intent.putExtra("EXTRA_SESSION_ID",ETPhone.getText().toString());
                         startActivity(intent);
                     }
                     catch(Exception e)
