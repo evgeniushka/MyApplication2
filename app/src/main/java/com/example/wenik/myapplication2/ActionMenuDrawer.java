@@ -79,7 +79,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         else
         {
             t1.setText("שלום, "+db.getUserFirstName(valuePhone.substring(1)));
-            t2.setText("יש לך "+"__"+"התראות פעילות: \n");
+            t2.setText("יש לך "+db.getAlertsCount(valuePhone.substring(1))+" התראות פעילות: \n");
             findViewById(R.id.button3).setVisibility(View.VISIBLE);
         }
 
@@ -150,11 +150,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_reg) {
-            Intent intent = new Intent(ActionMenuDrawer.this, Register.class);
-            startActivity(intent);
-            // Handle the camera action
-        } else if (id == R.id.nav_login) {
+        if (id == R.id.nav_login) {
             Intent intent = new Intent(ActionMenuDrawer.this, Login.class);
             startActivity(intent);
 

@@ -320,11 +320,11 @@ public class MySecondDBHandler extends SQLiteOpenHelper {
         return st;
     }
 
-    public String getUserFirstName(String ph)
+    public String getUserFirstName(String phone)
     {
         String st="";
         SQLiteDatabase db = getWritableDatabase();
-        String user = "Select * from Users where phone = "+ph;
+        String user = "Select * from Users where phone = "+phone;
         Cursor c=db.rawQuery(user,null);
         c.moveToFirst();
         while(!c.isAfterLast())
@@ -338,5 +338,25 @@ public class MySecondDBHandler extends SQLiteOpenHelper {
         c.close();
         db.close();
         return st;
+    }
+
+    public int getAlertsCount(String phone)
+    {
+        int count=0;
+        SQLiteDatabase db = getWritableDatabase();
+        String user = "Select * from Alerts where userPhone = "+phone;
+        Cursor c=db.rawQuery(user,null);
+        c.moveToFirst();
+        while(!c.isAfterLast())
+        {
+            if(c.getString(c.getColumnIndex("userPhone"))!=null)
+            {
+                count++;
+            }
+            c.moveToNext();
+        }
+        c.close();
+        db.close();
+        return count;
     }
 }

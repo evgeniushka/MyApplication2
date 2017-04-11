@@ -1,8 +1,10 @@
 package com.example.wenik.myapplication2;
 
+import android.content.SharedPreferences;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 public class AddChild extends AppCompatActivity {
 
     private MySecondDBHandler db;
+    private SharedPreferences sp;
 
     String userPhone ;
     EditText childName;
@@ -36,7 +39,6 @@ public class AddChild extends AppCompatActivity {
         setSupportActionBar(toolbar);
         db = new MySecondDBHandler(this, null, null, 4);
         //get the user's phone from previous activity
-        userPhone = getIntent().getStringExtra("EXTRA_SESSION_ID");
 
         final TextView tl = (TextView) findViewById(R.id.InptChildName);
         final TextView t2 = (TextView) findViewById(R.id.ChildName);
@@ -46,6 +48,12 @@ public class AddChild extends AppCompatActivity {
         final TextView t4 = (TextView) findViewById(R.id.textView5);
         final ImageButton b2 = (ImageButton) findViewById(R.id.BtnDelChild);
         final ImageButton b3 = (ImageButton) findViewById(R.id.BtnDelNotifi);
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sp.edit();
+        String value = sp.getString("isLogged", "");
+        String valuePhone = sp.getString("userPhone", "");
+        userPhone = valuePhone;
 
         timeP= (TimePicker) findViewById(R.id.alertTime);
 
