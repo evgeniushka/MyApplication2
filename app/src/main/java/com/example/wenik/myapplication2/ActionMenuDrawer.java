@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 public class ActionMenuDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
-
 {
     private SharedPreferences sp;
     private TextView t1;
@@ -72,14 +71,26 @@ public class ActionMenuDrawer extends AppCompatActivity
 
         if(value.compareTo("no")==0)
         {
-            t1.setText("ברוך הבא לאפליקציה, \n לרישום לחץ כאן");
+            String hello= "ברוך הבא לאפליקציה, \n לרישום לחץ כאן";
+            t1.setText(hello);
             t2.setText("");
             findViewById(R.id.button2).setVisibility(View.VISIBLE);
         }
         else
         {
-            t1.setText("שלום, "+db.getUserFirstName(valuePhone.substring(1)));
-            t2.setText("יש לך "+db.getAlertsCount(valuePhone.substring(1))+" התראות פעילות: \n");
+            Toast.makeText(ActionMenuDrawer.this, "haha", Toast.LENGTH_LONG).show();
+            try {
+                String name = db.getUserFirstName(valuePhone.substring(1));
+                String hello = "שלום, " + name;
+                t1.setText(hello);
+                int alertsCount = db.getAlertsCount(valuePhone.substring(1));
+               String youHaveAlerts = "יש לך " + alertsCount + " התראות פעילות: \n";
+                t2.setText(youHaveAlerts);
+            }
+            catch (SQLException e)
+            {
+                Toast.makeText(ActionMenuDrawer.this, e.toString(), Toast.LENGTH_LONG).show();
+            }
             findViewById(R.id.button3).setVisibility(View.VISIBLE);
         }
 
