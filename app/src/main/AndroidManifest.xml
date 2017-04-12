@@ -36,7 +36,13 @@
         <activity android:name=".SuccessfulRegistration" />
         <activity android:name=".AddContact" />
         <activity android:name=".Repeating_activity"/>
-        <receiver android:name=".Notification_receiver"/>
+        <receiver android:name=".Notification_receiver"
+            android:exported="true"
+            android:enabled="true">
+        <intent-filter>
+            <action android:name="android.intent.action.NOTIFY" />
+        </intent-filter>
+        </receiver>
 
         <activity android:name=".MainActivity">
             <intent-filter>

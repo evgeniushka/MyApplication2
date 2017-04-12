@@ -1,9 +1,12 @@
 package com.example.wenik.myapplication2;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.SQLException;
+import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -121,7 +124,25 @@ public class ActionMenuDrawer extends AppCompatActivity
                 }
             }
         });
-    }//end onCreate
+
+        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(Calendar.HOUR_OF_DAY,19);
+                calendar.set(Calendar.MINUTE,30);
+
+                Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
+
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100, new Intent("android.intent.action.NOTIFY"),PendingIntent.FLAG_UPDATE_CURRENT);
+
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
+            }
+        });
+         }//end onCreate
 
 
     @Override

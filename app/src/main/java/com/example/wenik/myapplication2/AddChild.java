@@ -159,17 +159,7 @@ public class AddChild extends AppCompatActivity {
                     Toast.makeText(AddChild.this, "can't print alerts" , Toast.LENGTH_LONG).show();
                 }
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY,18);
-                calendar.set(Calendar.MINUTE,14);
 
-                Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
-
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100,intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),alarmManager.INTERVAL_DAY,pendingIntent);
 
             }
         });
