@@ -160,8 +160,8 @@ public class AddChild extends AppCompatActivity {
                 }
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY,21);
-                calendar.set(Calendar.MINUTE,41);
+                calendar.set(Calendar.HOUR_OF_DAY,18);
+                calendar.set(Calendar.MINUTE,14);
 
                 Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
 

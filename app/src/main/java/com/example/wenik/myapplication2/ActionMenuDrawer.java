@@ -69,6 +69,7 @@ public class ActionMenuDrawer extends AppCompatActivity
         String value = sp.getString("isLogged", "");
         String valuePhone = sp.getString("userPhone", "");
 
+
         if(value.compareTo("no")==0)
         {
             String hello= "ברוך הבא לאפליקציה, \n לרישום לחץ כאן";
@@ -78,13 +79,14 @@ public class ActionMenuDrawer extends AppCompatActivity
         }
         else
         {
-            Toast.makeText(ActionMenuDrawer.this, "haha", Toast.LENGTH_LONG).show();
+             String cutPhone =  valuePhone.substring(1);
+            Toast.makeText(ActionMenuDrawer.this, valuePhone, Toast.LENGTH_LONG).show();
+              String name = db.getUserFirstName(cutPhone);
+             int alertsCount = db.getAlertsCount(cutPhone);
             try {
-                String name = db.getUserFirstName(valuePhone.substring(1));
-                String hello = "שלום, " + name;
+                String hello = "שלום, "+name;
                 t1.setText(hello);
-                int alertsCount = db.getAlertsCount(valuePhone.substring(1));
-               String youHaveAlerts = "יש לך " + alertsCount + " התראות פעילות: \n";
+                String youHaveAlerts = "יש לך "+alertsCount+ " התראות פעילות";
                 t2.setText(youHaveAlerts);
             }
             catch (SQLException e)
