@@ -130,12 +130,12 @@ public class ActionMenuDrawer extends AppCompatActivity
             public void onClick(View v) {
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY,19);
-                calendar.set(Calendar.MINUTE,30);
+                calendar.set(Calendar.HOUR_OF_DAY,20);
+                calendar.set(Calendar.MINUTE,06);
 
                 Intent intent = new Intent(getApplicationContext(),Notification_receiver.class);
 
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),100, new Intent("android.intent.action.NOTIFY"),PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),10, new Intent("android.intent.action.NOTIFY"),PendingIntent.FLAG_UPDATE_CURRENT);
 
                 AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 

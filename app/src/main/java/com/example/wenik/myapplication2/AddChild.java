@@ -9,13 +9,21 @@ import android.database.sqlite.SQLiteDatabase;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.IdRes;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
+import android.text.Layout;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -36,14 +44,16 @@ public class AddChild extends AppCompatActivity {
     TimePicker timeP;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_child);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         db = new MySecondDBHandler(this, null, null, 4);
-        //get the user's phone from previous activity
 
+        final ImageButton addMoreNotifications = new ImageButton(AddChild.this);
+        final ImageButton delMoreNotifications = new ImageButton(AddChild.this);
+        final TextView tAddMoreN = new TextView(AddChild.this);
         final TextView tl = (TextView) findViewById(R.id.InptChildName);
         final TextView t2 = (TextView) findViewById(R.id.ChildName);
         final ImageButton b1 = (ImageButton) findViewById(R.id.BtnNotifi);
@@ -52,6 +62,7 @@ public class AddChild extends AppCompatActivity {
         final TextView t4 = (TextView) findViewById(R.id.textView5);
         final ImageButton b2 = (ImageButton) findViewById(R.id.BtnDelChild);
         final ImageButton b3 = (ImageButton) findViewById(R.id.BtnDelNotifi);
+        final LinearLayout linL = (LinearLayout) findViewById(R.id.NotifiButtonsLine);
 
         sp = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sp.edit();
@@ -59,6 +70,7 @@ public class AddChild extends AppCompatActivity {
         userPhone = sp.getString("userPhone", "");
 
         timeP= (TimePicker) findViewById(R.id.alertTime);
+        timeP.setIs24HourView(true);
 
         day1= (CheckBox) findViewById(R.id.ChBDay1);
         day2= (CheckBox) findViewById(R.id.ChBDay2);
@@ -96,6 +108,8 @@ public class AddChild extends AppCompatActivity {
                 tb1.setVisibility(View.VISIBLE);
                 t4.setVisibility(View.VISIBLE);
                 b3.setVisibility(View.VISIBLE);
+
+                addMoreNotifi();
             }
         });
 
@@ -120,6 +134,11 @@ public class AddChild extends AppCompatActivity {
                 b3.setVisibility(View.INVISIBLE);
                 tb1.setVisibility(View.INVISIBLE);
                 t4.setVisibility(View.INVISIBLE);
+
+                addMoreNotifications.setVisibility(View.INVISIBLE);
+                delMoreNotifications.setVisibility(View.INVISIBLE);
+                tAddMoreN.setVisibility(View.INVISIBLE);
+
             }
         });
 
@@ -163,7 +182,11 @@ public class AddChild extends AppCompatActivity {
 
             }
         });
+
     }
+
+
+
 
     public void addChild()
     {
@@ -281,6 +304,102 @@ public class AddChild extends AppCompatActivity {
 
             }
         }
+
+    }
+
+
+    public void addMoreNotifi()
+    {
+        final ImageButton addMoreNotifications = new ImageButton(AddChild.this);
+        final ImageButton delMoreNotifications = new ImageButton(AddChild.this);
+        final TextView tAddMoreN = new TextView(AddChild.this);
+
+        addMoreNotifications.setBackground(findViewById(R.id.BtnNotifi).getBackground());
+        addMoreNotifications.setImageResource(android.R.drawable.ic_input_add);
+        addMoreNotifications.setVisibility(View.VISIBLE);
+        addMoreNotifications.setLayoutParams(findViewById(R.id.BtnNotifi).getLayoutParams());
+        tAddMoreN.setText(((TextView) findViewById(R.id.AddNotifi)).getText());
+        tAddMoreN.setLayoutParams(findViewById(R.id.AddNotifi).getLayoutParams());
+        tAddMoreN.setVisibility(View.VISIBLE);
+
+        delMoreNotifications.setBackground(findViewById(R.id.BtnDelNotifi).getBackground());
+        delMoreNotifications.setImageResource(android.R.drawable.ic_delete);
+        delMoreNotifications.setVisibility(View.VISIBLE);
+
+        LinearLayout lin = (LinearLayout) findViewById(R.id.linearLayout);
+        LinearLayout lin2 = new LinearLayout(AddChild.this);
+        lin2.setOrientation(LinearLayout.HORIZONTAL);
+        lin2.setLayoutParams(findViewById(R.id.NotifiButtonsLine).getLayoutParams());
+        lin2.addView(addMoreNotifications);
+        lin2.addView(tAddMoreN);
+        lin.addView(lin2,5);
+        lin.invalidate();
+
+        addMoreNotifications.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addTimePickerContent();
+            }});
+    }
+
+    public void addTimePickerContent()
+    {
+        final LinearLayout mainLin= (LinearLayout) findViewById(R.id.linearLayout);
+        final TextView days = new TextView(AddChild.this);
+        final TextView hours = new TextView(AddChild.this);
+        final CheckBox day1 = new CheckBox(AddChild.this);
+        final CheckBox day2 = new CheckBox(AddChild.this);
+        final CheckBox day3 = new CheckBox(AddChild.this);
+        final CheckBox day4 = new CheckBox(AddChild.this);
+        final CheckBox day5 = new CheckBox(AddChild.this);
+        final CheckBox day6 = new CheckBox(AddChild.this);
+        final TimePicker tp = new TimePicker(AddChild.this);
+
+        final TableLayout table = new TableLayout(AddChild.this);
+        final TableRow row1 = new TableRow(AddChild.this);
+        final TableRow row2 = new TableRow(AddChild.this);
+        final TableRow row3 = new TableRow(AddChild.this);
+
+        final LinearLayout lin = new LinearLayout(AddChild.this);
+
+        table.setLayoutParams(findViewById(R.id.DaysTable).getLayoutParams());
+        row1.setLayoutParams(findViewById(R.id.DaysRow).getLayoutParams());
+        row2.setLayoutParams(findViewById(R.id.TxtHour).getLayoutParams());
+        row3.setLayoutParams(findViewById(R.id.TimeRow).getLayoutParams());
+
+        days.setText("ימי פעילות");
+        hours.setText("שעת התראה");
+        days.setLayoutParams(findViewById(R.id.textView5).getLayoutParams());
+        days.setLayoutParams(findViewById(R.id.textView2).getLayoutParams());
+
+        day1.setText("א'");
+        day2.setText("ב'");
+        day3.setText("ג'");
+        day4.setText("ד'");
+        day5.setText("ה'");
+        day6.setText("ו'");
+
+        day1.setLayoutParams(findViewById(R.id.ChBDay1).getLayoutParams());
+        day2.setLayoutParams(findViewById(R.id.ChBDay2).getLayoutParams());
+        day3.setLayoutParams(findViewById(R.id.ChBDay3).getLayoutParams());
+        day4.setLayoutParams(findViewById(R.id.ChBDay4).getLayoutParams());
+        day5.setLayoutParams(findViewById(R.id.ChBDay5).getLayoutParams());
+        day6.setLayoutParams(findViewById(R.id.ChBDay6).getLayoutParams());
+
+        lin.addView(day1);
+        lin.addView(day2);
+        lin.addView(day3);
+        lin.addView(day4);
+        lin.addView(day5);
+        lin.addView(day6);
+        row3.addView(tp);
+        row1.addView(lin);
+        table.addView(row1);
+        table.addView(row2);
+        table.addView(row3);
+
+        mainLin.addView(table);
+        mainLin.invalidate();
 
     }
 }

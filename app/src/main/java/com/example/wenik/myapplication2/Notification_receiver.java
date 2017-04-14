@@ -23,8 +23,8 @@ public class Notification_receiver extends BroadcastReceiver
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context)
                 .setContentIntent(pendingIntent)
                 .setSmallIcon(android.R.drawable.arrow_up_float)
-                .setContentTitle("Notification on a child")
-                .setContentText("Don't forget to take the child")
+                .setContentTitle("התראת RememberMe")
+                .setContentText("אל תשכח את הילד ברכב")
                 .setAutoCancel(true);
 
         notificationManager.notify(100,builder.build());

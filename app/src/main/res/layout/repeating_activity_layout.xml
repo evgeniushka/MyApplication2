@@ -6,8 +6,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="repeating activity"
+        android:text="נא לא לשכוח את הילד ברכב"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:textSize="20dp"
+        android:textColor="@android:color/holo_green_dark"
+        android:background="@android:color/holo_orange_light"
         />
+
+
 
 </LinearLayout>
